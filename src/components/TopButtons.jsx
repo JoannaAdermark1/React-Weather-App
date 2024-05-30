@@ -25,11 +25,12 @@ function TopButtons() {
         },
     ]
 
-  return <div className="flex item-center justify-center my-6">
-    {cities.map((city)=> (
-
-        <botton className="text-white text-lg font-medium">{city.title}</botton>
-
+  return 
+    <div className="flex item-center justify-around my-6">
+     {cities.map((city)=> (
+        <botton key={city.id}className="text-white text-lg font-medium">
+          {city.title}
+          </botton>
     ))}
   </div>
 }
