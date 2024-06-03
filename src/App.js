@@ -13,9 +13,14 @@ function App() {
     shadow-gray-400'>
       <TopButtons />
       <Inputs />
+      
       <TimeAndLocation /> 
       <TemperatureAndDetails />
-      <Forecast />
+
+      <Forecast title="hourly forecast"/>
+      <Forecast title="daily forecast"/>
+
+
     </div>
   );
 }
