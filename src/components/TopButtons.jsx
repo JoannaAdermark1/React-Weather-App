@@ -2,7 +2,7 @@ import React from 'react';
 
 function TopButtons() {
 
-    const cities =[
+    const cities=[
         {
             id:1,
             title: 'Stockholm',
