@@ -1,7 +1,11 @@
 import React from "react";
 import { UilSearch, UilLocationPoint } from '@iconscout/react-unicons';
 
- function Inputs() {
+function Inputs({ setUnits }) {
+  const handleUnitChange = (units) => {
+    setUnits(units);
+  };
+
   return ( 
     <div className="flex flex-row justify-center my-6">
         <div className="flex flex-row w-3/4 justify-center space-x-4">
@@ -20,12 +24,19 @@ import { UilSearch, UilLocationPoint } from '@iconscout/react-unicons';
         </div>
 
         <div className="flex flex-row w-1/4 items-center justify-center space-x-2">
-        <button className="text-xl text-white font-light">°C</button>
+        <button 
+        className="text-xl text-white font-light"
+        onClick={(() => handleUnitCgange('metric'))}>
+          °C
+          </button>
+
         <span className="text-xl text-white">|</span>
-        <button className="text-xl text-white font-light">°F</button>
+        <button 
+        className="text-xl text-white font-light"
+        onClick={() => handleUnitCgange ('imperial')}>
+          °F
+          </button>
       </div>
-
-
     </div>
   );
 }
