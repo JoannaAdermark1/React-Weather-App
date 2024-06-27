@@ -9,12 +9,12 @@ import {
     UilSunset,
 } from '@iconscout/react-unicons';
 
-function TemperatureAndDetails() {
+function TemperatureAndDetails({ weather }) {
     return (
         <div>
             <div className="flex items-center justify-center py-6 
             text-xl text-cyan-300">
-                <p>Sunny</p>
+                <p>{weather.details}</p>
             </div>
 
             <div className="flex flex-row items-center justify-between
@@ -24,28 +24,28 @@ function TemperatureAndDetails() {
                     alt="Weather Icon"
                     className="w-20"
                 />
-                <p className="text-5xl">34°</p>
+                <p className="text-5xl">{weather.temp.toFixed()}°</p>
                 <div className="flex flex-col space-y-2">
 
                     <div className='flex font-light text-sm items-center 
         justify-center'>
                         <UilTemperature size={18} className="mr-1" />
                         Real feel:
-                        <span className="font-medium ml-1">32°</span>
+                        <span className="font-medium ml-1">{weather.feels_like.toFixed()}°</span>
                     </div>
 
                     <div className='flex font-light text-sm items-center 
         justify-center'>
                         <UilTear size={18} className="mr-1" />
                         Humidity:
-                        <span className="font-medium ml-1">65%°</span>
+                        <span className="font-medium ml-1">{weather.humidity.toFixed()}%</span>
                     </div>
 
                     <div className='flex font-light text-sm items-center 
         justify-center'>
                         <UilWind size={18} className="mr-1" />
                         Wind:
-                        <span className="font-medium ml-1">11 km/h</span>
+                        <span className="font-medium ml-1">{weather.speed.toFixed()} km/h</span>
                     </div>
                 </div>
             </div>
@@ -54,20 +54,16 @@ function TemperatureAndDetails() {
             <div className='flex flex-row items-center justify-center 
      space-x-4 text-white text-sm py-3'>
                 
-                <DayKeyInfo title="Rise" text="06:45AM">
-                    <UilSun/>
+                <DayKeyInfo title="Rise" text={formatToLocalTime(weather.sunrise, weather.timezone, "hh:mm a")}>
+                    <UilSun />
                 </DayKeyInfo>
-
-                <DayKeyInfo title="Set" text="07:45PM">
-                    <UilSunset/>
+                <DayKeyInfo title="Set" text={formatToLocalTime(weather.sunset, weather.timezone, "hh:mm a")}>
+                    <UilSunset />
                 </DayKeyInfo>
-              
-                <DayKeyInfo  title="High" text="35°">
+                <DayKeyInfo title="High" text={`${weather.temp_max.toFixed()}°`}>
                     <UilArrowUp />
                 </DayKeyInfo>
-                
-               
-                <DayKeyInfo  title="Low" text="25°">
+                <DayKeyInfo title="Low" text={`${weather.temp_min.toFixed()}°`}>
                     <UilArrowDown />
                 </DayKeyInfo>
             </div>
@@ -75,14 +71,20 @@ function TemperatureAndDetails() {
     );
 }
 
-function DayKeyInfo(props) {
-    return <>
-        {props.children}
-        <p className="font-light">
-            {props.title}: <span className='font-medium ml-1'>{props.text}</span>
-        </p>
-        <p className="font-light"> | </p>
-    </>
+function DayKeyInfo({ title, text, children }) {
+    return (
+        <div className="flex items-center justify-center">
+            {children}
+            <p className="font-light">
+                {title}: <span className='font-medium ml-1'>{text}</span>
+            </p>
+        </div>
+    );
+}
+
+function formatToLocalTime(epochTime, timezone, format) {
+    const date = new Date(epochTime * 1000);
+    return date.toLocaleTimeString('en-US', { timeZone: timezone, hour12: true, hour: 'numeric', minute: 'numeric' });
 }
 
 export default TemperatureAndDetails;
