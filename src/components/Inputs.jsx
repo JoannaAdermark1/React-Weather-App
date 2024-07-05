@@ -26,14 +26,14 @@ function Inputs({ setUnits }) {
         <div className="flex flex-row w-1/4 items-center justify-center space-x-2">
         <button 
         className="text-xl text-white font-light"
-        onClick={(() => handleUnitCgange('metric'))}>
+        onClick={(() => handleUnitChange('metric'))}>
           °C
           </button>
 
         <span className="text-xl text-white">|</span>
         <button 
         className="text-xl text-white font-light"
-        onClick={() => handleUnitCgange ('imperial')}>
+        onClick={() => handleUnitChange ('imperial')}>
           °F
           </button>
       </div>
